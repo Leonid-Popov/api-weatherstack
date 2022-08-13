@@ -1,0 +1,68 @@
+plugins {
+    id 'java-library'
+    id "io.qameta.allure" version "2.10.0"
+}
+
+configurations {
+    agent
+    cucumber
+}
+repositories {
+    mavenCentral()
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+def jUnitVersion = "5.8.2"
+def allureVersion = "2.18.1"
+
+//apply plugin: 'io.qameta.allure'
+
+apply plugin: 'io.qameta.allure'
+
+allure {
+//    value = "$allureVersion"
+    aspectjweaver = true
+    autoconfigure = true
+
+
+}
+
+dependencies {
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:$jUnitVersion",
+            'io.rest-assured:rest-assured:5.1.1',
+            'com.fasterxml.jackson.core:jackson-databind:2.13.3',
+            'io.cucumber:cucumber-junit:3.0.2',
+            'io.cucumber:cucumber-core:3.0.2',
+            'io.cucumber:cucumber-java:3.0.2',
+            'org.apache.logging.log4j:log4j-core:2.18.0',
+            'org.slf4j:slf4j-simple:1.7.36',
+            'org.slf4j:slf4j-api:1.7.36',
+            'org.assertj:assertj-core:3.23.1',
+//            'io.qameta.allure:allure-cucumber3-jvm:2.7.0',
+//            'io.qameta.allure:allure-gradle:2.5',
+            'io.qameta.allure:allure-java-commons:2.7.0',
+//            'io.qameta.allure:allure-testng:2.7.0',
+            'io.qameta.allure:allure-cucumber6-jvm:2.19.0',
+            'io.qameta.allure:allure-junit-platform:2.19.0'
+
+    )
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "**/*Test.class"
+}
