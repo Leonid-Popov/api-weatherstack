@@ -1,6 +1,6 @@
 package com.weatherstak.api.dto;
 
-public class Request{
+public class Request {
     private String type;
     private String query;
     private String language;

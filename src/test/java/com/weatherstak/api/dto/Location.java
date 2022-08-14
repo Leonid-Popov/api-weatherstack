@@ -1,6 +1,6 @@
 package com.weatherstak.api.dto;
 
-public class Location{
+public class Location {
     private String name;
     private String country;
     private String region;

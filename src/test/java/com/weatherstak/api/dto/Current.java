@@ -2,7 +2,7 @@ package com.weatherstak.api.dto;
 
 import java.util.ArrayList;
 
-public class Current{
+public class Current {
     private String observation_time;
     private int temperature;
     private int weather_code;
