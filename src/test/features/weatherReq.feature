@@ -40,7 +40,7 @@ Feature: Tests for weatherstak api
       | Moscow | 105  | function_access_restricted | gang |
       | Moscow | 605  | invalid_language           | en   |
 
-#    Тест показывает результаты вывода в лог
+#    Тест с ошибкой, показывает результаты вывода в лог
   @CheckDataNegative
   Scenario Outline: Negative test with error
     When User send get request weather from city <City>

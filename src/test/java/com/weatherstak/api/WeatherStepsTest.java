@@ -2,16 +2,28 @@ package com.weatherstak.api;
 
 import com.weatherstak.api.dto.ResponseError;
 import com.weatherstak.api.dto.WeatherResponse;
+import cucumber.api.CucumberOptions;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.api.junit.Cucumber;
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
+import org.junit.runner.RunWith;
 
+import static cucumber.api.SnippetType.UNDERSCORE;
 import static io.restassured.RestAssured.given;
 
-public class WeatherSteps {
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/features",
+        glue = "com.weatherstak.api",
+        tags = "@all",
+        snippets = UNDERSCORE
+)
+
+public class WeatherStepsTest {
 
     public static final String ACCESS_KEY_VALUE = "387377f7e3a6b885540637bbc1588c87";
     public static final String INVALID_ACCESS_KEY_VALUE = "387377f7e3a6b885540637bbc158";

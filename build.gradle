@@ -1,12 +1,8 @@
 plugins {
-    id 'java-library'
+    id 'java'
     id "io.qameta.allure" version "2.10.0"
 }
 
-configurations {
-    agent
-    cucumber
-}
 repositories {
     mavenCentral()
 }
@@ -18,16 +14,11 @@ compileTestJava {
 def jUnitVersion = "5.8.2"
 def allureVersion = "2.18.1"
 
-//apply plugin: 'io.qameta.allure'
-
 apply plugin: 'io.qameta.allure'
 
 allure {
-//    value = "$allureVersion"
-    aspectjweaver = true
     autoconfigure = true
-
-
+    allureVersion = "$allureVersion"
 }
 
 dependencies {
@@ -42,12 +33,14 @@ dependencies {
             'org.slf4j:slf4j-simple:1.7.36',
             'org.slf4j:slf4j-api:1.7.36',
             'org.assertj:assertj-core:3.23.1',
-//            'io.qameta.allure:allure-cucumber3-jvm:2.7.0',
 //            'io.qameta.allure:allure-gradle:2.5',
             'io.qameta.allure:allure-java-commons:2.7.0',
 //            'io.qameta.allure:allure-testng:2.7.0',
             'io.qameta.allure:allure-cucumber6-jvm:2.19.0',
-            'io.qameta.allure:allure-junit-platform:2.19.0'
+//            "io.qameta.allure:allure-junit5:$jUnitVersion",
+//            "io.qameta.allure:allure-assertj:$jUnitVersion",
+            'org.aspectj:aspectjweaver:1.6.10',
+            "io.qameta.allure:allure-rest-assured:$allureVersion"
 
     )
 }
