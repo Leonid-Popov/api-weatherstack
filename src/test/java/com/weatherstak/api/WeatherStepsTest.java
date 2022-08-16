@@ -33,6 +33,7 @@ public class WeatherStepsTest {
     //    Запрос погоды по городу
     private Response weatherRequest(String city) {
         return given()
+//                .addFilter(new AllureRestAssured())
                 .baseUri(URL)
                 .basePath("current?access_key=" + ACCESS_KEY_VALUE)
                 .contentType(ContentType.JSON)
@@ -67,21 +68,21 @@ public class WeatherStepsTest {
     }
 
     //Получение информации о погоде по городу
-    @Step("User send get request weather from city (.*)")
+    @Step("User send get request weather from city {city}")
     @Then("User send get request weather from city (.*)")
     public void getWeather(String city) {
         response = weatherRequest(city);
     }
 
     //Получение информации о погоде по городу с доп параметром "язык"
-    @Step("User get weather from city (.*) with language (.*)")
+    @Step("User get weather from city {city} with language {lang}")
     @Then("User get weather from city (.*) with language (.*)")
     public void weatherReqWithLang(String city, String lang) {
         response = weatherReqWithLanguage(city, lang);
     }
 
     //Проверка локации города
-    @Step("Check location name (.*)")
+    @Step("Check location name {name}")
     @When("Check location name (.*)")
     public void checkLocationName(String name) {
         WeatherResponse weatherResponse = response.as(WeatherResponse.class);
@@ -89,14 +90,14 @@ public class WeatherStepsTest {
     }
 
     //Проверка кода ответа
-    @Step("Check status code (.*)")
+    @Step("Check status code {code}")
     @When("Check status code (.*)")
     public void checkStatus(String code) {
         Assertions.assertEquals(code, String.valueOf(response.getStatusCode()));
     }
 
     //Проверка страны
-    @Step("Check country (.*)")
+    @Step("Check country {country}")
     @When("Check country (.*)")
     public void checkCountry(String country) {
         WeatherResponse weatherResponse = response.as(WeatherResponse.class);
@@ -104,14 +105,14 @@ public class WeatherStepsTest {
     }
 
     //    Запрос с невалидным ключом доступа
-    @Step("User send request with invalid access key for city (.*)")
+    @Step("User send request with invalid access key for city {city}")
     @When("User send request with invalid access key for city (.*)")
     public void sendErrorReq(String city) {
         response = errorRequest(city);
     }
 
     //Проверка кода ошибки и типа ошибки
-    @Step("Check response error code (\\d+) and error type (.*)")
+    @Step("Check response error code {code} and error type {message}")
     @When("Check response error code (\\d+) and error type (.*)")
     public void checkCode(int code, String message) {
         ResponseError responseError = response.as((ResponseError.class));

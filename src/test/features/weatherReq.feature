@@ -1,6 +1,7 @@
 @all
 Feature: Tests for weatherstak api
 
+  @Test
   @CheckData
   Scenario Outline: User check data correct
     When User send get request weather from city <City>

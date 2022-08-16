@@ -14,6 +14,10 @@ import static cucumber.api.SnippetType.UNDERSCORE;
         snippets = UNDERSCORE
 )
 public class WeatherTest {
+    public void weatherTest(){
+        WeatherStepsTest weatherStepsTest = new WeatherStepsTest();
+
+    }
 
 }
 
